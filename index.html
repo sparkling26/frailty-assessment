@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>지역사회 노인 노쇠 측정도구</title>
+  <style>
+    :root{
+      --bg:#f4f8fb;
+      --card:#ffffff;
+      --line:#d7e3ec;
+      --text:#1f2937;
+      --muted:#5f6b7a;
+      --accent:#1677b8;
+      --accent-soft:#e8f4fb;
+      --ok:#157347;
+      --warn:#b56a00;
+      --danger:#b42318;
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+      font-size:18px;
+    }
+    header{
+      background:linear-gradient(135deg,#dff3ff,#f8fcff);
+      border-bottom:1px solid var(--line);
+      padding:28px 20px 24px;
+    }
+    .wrap{max-width:920px;margin:0 auto}
+    h1{font-size:clamp(28px,5vw,42px);line-height:1.25;margin:0 0 10px}
+    h2{font-size:clamp(24px,4vw,32px);margin:0}
+    h3{font-size:21px;margin:0 0 10px}
+    p{margin:8px 0}
+    .lead{color:var(--muted);max-width:760px}
+    .notice{
+      margin-top:16px;padding:14px 16px;border:1px solid #b9d9ec;
+      background:#fff;border-radius:14px;font-size:16px
+    }
+    nav{
+      position:sticky;top:0;z-index:20;
+      background:rgba(255,255,255,.94);backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    nav .wrap{display:flex;gap:8px;overflow-x:auto;padding:10px 14px}
+    nav a{
+      white-space:nowrap;text-decoration:none;color:var(--accent);
+      border:1px solid #bcd9ea;background:#fff;padding:9px 13px;border-radius:999px;
+      font-weight:700;font-size:15px
+    }
+    main{padding:24px 16px 56px}
+    section{
+      background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+      margin:0 auto 24px;padding:22px;box-shadow:0 6px 20px rgba(26,55,77,.05)
+    }
+    #kfrail{background:#f4fbff;border-color:#b9ddeb}
+    #ckfi{background:#fffaf1;border-color:#ead8ae}
+    #kfs{background:#f7f5ff;border-color:#d7cdef}
+    .completion{
+      background:#ffffff;border:2px solid #9fc6db;border-radius:var(--radius);
+      padding:26px 22px;text-align:center;box-shadow:0 6px 20px rgba(26,55,77,.06)
+    }
+    .completion h2{margin-bottom:8px}
+    .completion p{color:var(--muted)}
+    .completion .submit-all{margin-top:16px;min-width:240px}
+    #final-result{max-width:720px;margin:18px auto 0;text-align:left}
+    .section-head{
+      display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+      margin-bottom:16px;padding-bottom:14px;border-bottom:2px solid var(--accent-soft)
+    }
+    .badge{
+      display:inline-block;background:var(--accent-soft);color:var(--accent);
+      border-radius:999px;padding:4px 10px;font-size:14px;font-weight:800;margin-bottom:6px
+    }
+    .question{
+      border:1px solid var(--line);border-radius:16px;padding:22px;margin:22px 0;
+      background:#fff
+    }
+    .qno{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-width:34px;height:34px;border-radius:50%;background:var(--accent);color:#fff;
+      font-weight:800;margin-right:8px
+    }
+    .qtext{font-weight:750;font-size:20px}
+    .helper{font-size:15px;color:var(--muted);margin:8px 0 10px}
+    .options{display:grid;gap:13px;margin-top:16px}
+    label.option{
+      display:flex;align-items:center;gap:13px;
+      border:1px solid var(--line);border-radius:13px;padding:16px 17px;
+      cursor:pointer;background:#fff;line-height:1.55
+    }
+    label.option:hover{border-color:#7db7d8;background:#f8fcff}
+    input[type="radio"]{width:24px;height:24px;margin:0;accent-color:var(--accent);flex:0 0 auto}
+    .score-note{font-size:14px;color:var(--muted);margin-top:10px}
+    .actions{
+      display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)
+    }
+    button{
+      border:0;border-radius:12px;padding:13px 18px;font-size:17px;font-weight:800;cursor:pointer
+    }
+    .primary{background:var(--accent);color:#fff}
+    .secondary{background:#eef3f6;color:#314251}
+    .result{
+      display:none;margin-top:18px;border-radius:14px;padding:20px;border:1px solid var(--line);
+      background:#f9fcfe;font-weight:700;line-height:1.65
+    }
+    .result .result-title{display:block;font-size:1.05rem;margin-bottom:4px}
+    .result .result-score{display:block;font-size:1.7rem;font-weight:850;margin:2px 0 8px}
+    .result .result-label{display:block;font-size:1.05rem;font-weight:800;margin:8px 0 2px}
+    .result.show{display:block}
+    .normal{color:var(--ok)} .prefrail{color:var(--warn)} .frail{color:var(--danger)}
+    .domain-title{
+      margin:24px 0 8px;padding:10px 12px;border-left:5px solid var(--accent);
+      background:var(--accent-soft);font-weight:850
+    }
+    footer{color:var(--muted);font-size:14px;text-align:center;padding:0 18px 35px}
+    @media(max-width:600px){
+      body{font-size:17px}
+      section{padding:17px;border-radius:14px}
+      .question{padding:15px}
+      .qtext{font-size:18px}
+      .section-head{display:block}
+      button{width:100%}
+    }
+    @media print{
+      nav,.actions{display:none!important}
+      body{background:#fff}
+      section{box-shadow:none;break-inside:avoid}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>지역사회 노인 노쇠 측정도구</h1>
+      </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#kfrail">1. K-FRAIL</a>
+    <a href="#ckfi">2. CKFI</a>
+    <a href="#kfs">3. KFS</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section id="kfrail" data-tool="kfrail">
+  <div class="section-head">
+    <div>
+      <span class="badge">도구 1</span>
+      <h2>FRAIL 척도의 한국어판 (K-FRAIL)</h2>
+      
+    </div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">1</span><span class="qtext">지난 한 달 동안 피곤하다고 느낀 적이 있습니까?</span></div>
+    <div class="options">
+      <label class="option"><input type="radio" name="kf1" value="1">항상 그렇다</label>
+      <label class="option"><input type="radio" name="kf1" value="1">거의 대부분 그렇다</label>
+      <label class="option"><input type="radio" name="kf1" value="0">종종 그렇다</label>
+      <label class="option"><input type="radio" name="kf1" value="0">가끔씩 그렇다</label>
+      <label class="option"><input type="radio" name="kf1" value="0">전혀 그렇지 않다</label>
+    </div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">2</span><span class="qtext">도움이 없이 혼자서 쉬지 않고 10개의 계단을 오르는 데 힘이 듭니까?</span></div>
+    <div class="options">
+      <label class="option"><input type="radio" name="kf2" value="1">예</label>
+      <label class="option"><input type="radio" name="kf2" value="0">아니오</label>
+    </div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">3</span><span class="qtext">도움이 없이 300미터를 혼자서 이동하는 데 힘이 듭니까?</span></div>
+    <div class="options">
+      <label class="option"><input type="radio" name="kf3" value="1">예</label>
+      <label class="option"><input type="radio" name="kf3" value="0">아니오</label>
+    </div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">4</span><span class="qtext">의사에게 다음 질병이 있다고 들은 적이 있습니까? (고혈압, 당뇨, 암, 만성 폐질환, 심근경색, 심부전, 협심증, 천식, 관절염, 뇌경색, 신장 질환)</span></div>
+    <div class="options">
+      <label class="option"><input type="radio" name="kf4" value="0">0~4개</label>
+      <label class="option"><input type="radio" name="kf4" value="1">5~11개</label>
+    </div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">5</span><span class="qtext">현재와 1년 전의 체중은 각각 몇 kg이었습니까?</span></div>
+        <div class="options">
+      <label class="option"><input type="radio" name="kf5" value="1">5% 이상 감소했다</label>
+      <label class="option"><input type="radio" name="kf5" value="0">5% 미만 감소했거나 감소하지 않았다</label>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="primary" onclick="scoreTool('kfrail')">K-FRAIL 점수 확인</button>
+    <button class="secondary" onclick="resetTool('kfrail')">응답 삭제</button>
+  </div>
+  <div id="kfrail-result" class="result" aria-live="polite"></div>
+</section>
+
+<section id="ckfi" data-tool="ckfi">
+  <div class="section-head">
+    <div>
+      <span class="badge">도구 2</span>
+      <h2>포괄적 한국 노인 허약 사정 도구 (CKFI)</h2>
+      
+    </div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">1</span><span class="qtext">다른 사람 도움이나 보조기 없이 머리보다 높은 곳에 있는 것을 손을 뻗쳐서 닿기 동작을 할 때 어려움을 느끼십니까?</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ck1" value="0">아니오</label><label class="option"><input type="radio" name="ck1" value="1">예</label></div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">2</span><span class="qtext">다른 사람 도움이나 보조기 없이 쉬지 않고 10계단 오르기 동작을 할 때 어려움을 느끼십니까?</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ck2" value="0">아니오</label><label class="option"><input type="radio" name="ck2" value="1">예</label></div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">3</span><span class="qtext">고기나 사과같이 딱딱한 음식을 씹을 때 어려움을 느끼십니까? 틀니를 착용하시는 경우 틀니를 착용한 상태를 기준으로 말씀해 주십시오.</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ck3" value="0">아니오</label><label class="option"><input type="radio" name="ck3" value="1">예</label></div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">4</span><span class="qtext">현재 시력 때문에 일상적인 활동을 하는 데 어려움이 있습니까?</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ck4" value="0">아니오</label><label class="option"><input type="radio" name="ck4" value="1">예</label></div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">5</span><span class="qtext">현재 청력 때문에 일상적인 활동을 하시는 데 어려움이 있습니까?</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ck5" value="0">아니오</label><label class="option"><input type="radio" name="ck5" value="1">예</label></div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">6</span><span class="qtext">현재 3개월 이상 앓으신 의사진단을 받은 만성질환이 3가지 이상이십니까?</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ck6" value="0">아니오</label><label class="option"><input type="radio" name="ck6" value="1">예</label></div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">7</span><span class="qtext">지난 1주일 동안 바깥에 나가기가 싫고 집에만 있고 싶으셨습니까?</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ck7" value="0">아니오</label><label class="option"><input type="radio" name="ck7" value="1">예</label></div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">8</span><span class="qtext">평소에 건강상태는 어떻다고 생각하십니까?</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ck8" value="0">좋은 편이다</label><label class="option"><input type="radio" name="ck8" value="1">그저 그렇다</label><label class="option"><input type="radio" name="ck8" value="1">나쁜 편이다</label></div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">9</span><span class="qtext">본인의 기억력이 현재 어떠하다고 생각하십니까?</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ck9" value="0">좋은 편이다</label><label class="option"><input type="radio" name="ck9" value="1">나쁜 편이다</label></div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">10</span><span class="qtext">현재 혼자 살고 계십니까?</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ck10" value="0">아니오</label><label class="option"><input type="radio" name="ck10" value="1">예</label></div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">11</span><span class="qtext">참여하시는 모임(단체 활동)이 있으십니까? (예: 친목, 종교, 문화 활동, 스포츠, 시민 또는 사회, 이익 또는 정치, 봉사, 학습단체)</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ck11" value="0">예</label><label class="option"><input type="radio" name="ck11" value="1">아니오</label></div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">12</span><span class="qtext">관계에 만족하는 주변 사람들이 몇 분이십니까?</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ck12" value="0">2명 이상</label><label class="option"><input type="radio" name="ck12" value="1">1명 이하</label></div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">13</span><span class="qtext">현재부터 1년 전까지 나의 고민이나 걱정거리를 들어준 주변사람들이 몇 분이십니까?</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ck13" value="0">2명 이상</label><label class="option"><input type="radio" name="ck13" value="1">1명 이하</label></div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">14</span><span class="qtext">현재부터 1년 전까지 어르신께서는 가족을 포함한 주변사람들에게 용돈, 생활비 등의 경제적 도움을 몇 번 받으셨습니까?</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ck14" value="0">1번 이상</label><label class="option"><input type="radio" name="ck14" value="1">받은 적 없음</label></div>
+  </div>
+
+  <div class="actions">
+    <button class="primary" onclick="scoreTool('ckfi')">CKFI 점수 확인</button>
+    <button class="secondary" onclick="resetTool('ckfi')">응답 삭제</button>
+  </div>
+  <div id="ckfi-result" class="result" aria-live="polite"></div>
+</section>
+
+<section id="kfs" data-tool="kfs">
+  <div class="section-head">
+    <div>
+      <span class="badge">도구 3</span>
+      <h2>한국형 노쇠 척도 (KFS)</h2>
+      
+    </div>
+  </div>
+
+  <div class="domain-title">신체적 노쇠</div>
+
+  <div class="question">
+    <div><span class="qno">1</span><span class="qtext">지난 1년 동안 특별한 이유 없이 체중이 4.5kg 이상 또는 기존 체중의 5% 이상 감소하였습니까?</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ks1" value="1">예</label><label class="option"><input type="radio" name="ks1" value="0">아니오</label></div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">2</span><span class="qtext">현재 자신의 건강상태를 어떻게 생각하십니까?</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ks2" value="1">나쁘다</label><label class="option"><input type="radio" name="ks2" value="0">나쁘지 않다</label></div>
+  </div>
+
+  <div class="domain-title">심리적 노쇠</div>
+
+  <div class="question">
+    <div><span class="qno">3</span><span class="qtext">지난 4주 동안 얼마나 자주 피곤함을 느끼셨습니까?</span></div>
+    <div class="options">
+      <label class="option"><input type="radio" name="ks3" value="1">항상 그렇다</label>
+      <label class="option"><input type="radio" name="ks3" value="1">대부분 그렇다</label>
+      <label class="option"><input type="radio" name="ks3" value="0">가끔 그렇다</label>
+      <label class="option"><input type="radio" name="ks3" value="0">조금 그렇다</label>
+      <label class="option"><input type="radio" name="ks3" value="0">전혀 그렇지 않다</label>
+    </div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">4</span><span class="qtext">활력이나 의욕이 없어 평소 하던 활동이나 관심사를 많이 줄이셨습니까?</span></div>
+    <div class="options"><label class="option"><input type="radio" name="ks4" value="1">예</label><label class="option"><input type="radio" name="ks4" value="0">아니오</label></div>
+  </div>
+
+  <div class="domain-title">사회적 노쇠</div>
+
+  <div class="question">
+    <div><span class="qno">5</span><span class="qtext">친구를 만나거나 이야기하는 빈도는 어느 정도입니까?</span></div>
+    <div class="options">
+      <label class="option"><input type="radio" name="ks5" value="0">매일</label>
+      <label class="option"><input type="radio" name="ks5" value="0">주 2~3회</label>
+      <label class="option"><input type="radio" name="ks5" value="0">주 1회 이상</label>
+      <label class="option"><input type="radio" name="ks5" value="1">월 1회 이상</label>
+      <label class="option"><input type="radio" name="ks5" value="1">월 1회 미만</label>
+      <label class="option"><input type="radio" name="ks5" value="1">친구가 없음</label>
+    </div>
+  </div>
+
+  <div class="question">
+    <div><span class="qno">6</span><span class="qtext">친밀하고 의지할 수 있는 사람과 원하는 만큼 연락하고 계십니까?</span></div>
+    <div class="options">
+      <label class="option"><input type="radio" name="ks6" value="1">전혀 그렇지 않다</label>
+      <label class="option"><input type="radio" name="ks6" value="1">거의 그렇지 않다</label>
+      <label class="option"><input type="radio" name="ks6" value="0">가끔 그렇다</label>
+      <label class="option"><input type="radio" name="ks6" value="0">대부분 그렇다</label>
+      <label class="option"><input type="radio" name="ks6" value="0">항상 그렇다</label>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="primary" onclick="scoreTool('kfs')">KFS 점수 확인</button>
+    <button class="secondary" onclick="resetTool('kfs')">응답 삭제</button>
+  </div>
+  <div id="kfs-result" class="result" aria-live="polite"></div>
+</section>
+
+<section class="completion" id="completion">
+  <h2>설문이 끝났습니다.</h2>
+  <p>세 가지 도구의 응답을 모두 확인한 뒤 아래 버튼을 눌러 주세요.</p>
+  <button class="primary submit-all" onclick="submitAll()">전체 응답 제출</button>
+  <div id="final-result" class="result" aria-live="polite"></div>
+</section>
+
+</main>
+
+<footer>
+  연구용 시범 페이지 · 응답 데이터는 저장되지 않습니다.
+</footer>
+
+<script>
+function getNames(tool){
+  if(tool==='kfrail') return ['kf1','kf2','kf3','kf4','kf5'];
+  if(tool==='ckfi') return Array.from({length:14},(_,i)=>'ck'+(i+1));
+  if(tool==='kfs') return ['ks1','ks2','ks3','ks4','ks5','ks6'];
+  return [];
+}
+function scoreTool(tool){
+  const names=getNames(tool);
+  let total=0, missing=[];
+  names.forEach((name,idx)=>{
+    const checked=document.querySelector(`input[name="${name}"]:checked`);
+    if(!checked) missing.push(idx+1);
+    else total += Number(checked.value);
+  });
+  const box=document.getElementById(tool+'-result');
+  box.classList.add('show');
+  if(missing.length){
+    box.className='result show frail';
+    box.textContent=`응답하지 않은 문항이 있습니다: ${missing.join(', ')}번`;
+    box.scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  if(tool==='kfrail'){
+    let label = total===0 ? '정상' : (total<=2 ? '전 노쇠' : '노쇠');
+    let cls = total===0 ? 'normal' : (total<=2 ? 'prefrail' : 'frail');
+    box.className='result show '+cls;
+    box.innerHTML=`<span class="result-title">K-FRAIL 총점</span><span class="result-score">${total}점 / 5점</span><span class="result-label">판정</span><span class="result-score">${label}</span>`;
+  } else if(tool==='ckfi'){
+    let label = total<=4 ? '정상' : (total<=6 ? '전 허약' : '허약');
+    let cls = total<=4 ? 'normal' : (total<=6 ? 'prefrail' : 'frail');
+    box.className='result show '+cls;
+    box.innerHTML=`<span class="result-title">CKFI 총점</span><span class="result-score">${total}점 / 14점</span><span class="result-label">판정</span><span class="result-score">${label}</span>`;
+  } else if(tool==='kfs'){
+    let label='';
+    let cls='';
+    if(total===0){
+      label='정상';
+      cls='normal';
+    } else if(total<=2){
+      label='전 노쇠';
+      cls='prefrail';
+    } else {
+      label='노쇠';
+      cls='frail';
+    }
+    box.className='result show '+cls;
+    box.innerHTML=`<span class="result-title">KFS 총점</span><span class="result-score">${total}점 / 6점</span><span class="result-label">판정</span><span class="result-score">${label}</span>`;
+  }
+  box.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function submitAll(){
+  const tools=['kfrail','ckfi','kfs'];
+  const labels={
+    kfrail:'FRAIL 척도의 한국어판 (K-FRAIL)',
+    ckfi:'포괄적 한국 노인 허약 사정 도구 (CKFI)',
+    kfs:'한국형 노쇠 척도 (KFS)'
+  };
+  let missingMessages=[];
+  tools.forEach(tool=>{
+    const names=getNames(tool);
+    const missing=[];
+    names.forEach((name,idx)=>{
+      if(!document.querySelector(`input[name="${name}"]:checked`)) missing.push(idx+1);
+    });
+    if(missing.length) missingMessages.push(`${labels[tool]}: ${missing.join(', ')}번`);
+  });
+
+  const box=document.getElementById('final-result');
+  box.classList.add('show');
+
+  if(missingMessages.length){
+    box.className='result show frail';
+    box.innerHTML='<strong>응답하지 않은 문항이 있습니다.</strong><br>'+missingMessages.join('<br>');
+    box.scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+
+  tools.forEach(tool=>scoreTool(tool));
+  box.className='result show normal';
+  box.innerHTML='<strong>설문이 종료되었습니다.</strong><br>세 가지 도구의 응답이 모두 완료되었습니다. 현재 시범 페이지에서는 응답이 서버로 전송되거나 저장되지 않습니다.';
+  box.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function resetTool(tool){
+  const section=document.getElementById(tool);
+  section.querySelectorAll('input[type="radio"]').forEach(el=>el.checked=false);
+  const box=document.getElementById(tool+'-result');
+  box.className='result';
+  box.textContent='';
+}
+</script>
+</body>
+</html>
