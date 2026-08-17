@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>지역사회 노인 노쇠 측정도구</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--text:#1f2937;--muted:#6b7280;--line:#e5e7eb;--accent:#2563eb;--soft:#eff6ff;--danger:#b91c1c}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+.container{max-width:980px;margin:0 auto;padding:24px 16px 56px}
+header{background:linear-gradient(135deg,#fff,#f8fbff);border:1px solid var(--line);border-radius:18px;padding:24px;margin-bottom:18px}
+h1{font-size:clamp(25px,4vw,38px);margin:0 0 8px}.lead{margin:0;color:var(--muted)}
+.notice{margin-top:14px;background:#fff7ed;border:1px solid #fed7aa;padding:12px 14px;border-radius:12px;font-size:14px}
+.progress{position:sticky;top:0;z-index:20;background:rgba(246,247,249,.94);backdrop-filter:blur(8px);padding:10px 0 12px;margin-bottom:6px}
+.progress-bar{height:8px;background:#e5e7eb;border-radius:999px;overflow:hidden}.progress-fill{height:100%;width:0;background:var(--accent);transition:.2s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 6px 24px rgba(0,0,0,.03)}
+.section-title{display:flex;gap:10px;align-items:center;margin:0 0 14px}.pill{font-size:12px;font-weight:700;background:var(--soft);color:var(--accent);padding:5px 9px;border-radius:999px}
+h2{font-size:23px;margin:0}.instrument h3,.expert h3{font-size:18px;margin:20px 0 10px}.instrument-question{padding:14px 0;border-top:1px solid var(--line)}.instrument-question:first-of-type{border-top:0}.instrument-question p{margin:0 0 9px;font-weight:600}
+.option-row{display:flex;flex-wrap:wrap;gap:8px}.chip{border:1px solid var(--line);border-radius:12px;padding:9px 11px;background:#fafafa;font-size:14px}
+.scale-note{background:#f9fafb;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;margin:12px 0 18px}.scale-note strong{display:block;margin-bottom:5px}
+.expert-q{padding:16px 0;border-top:1px solid var(--line)}.expert-q:first-of-type{border-top:0}.expert-q label.prompt{display:block;font-weight:700;margin-bottom:10px}
+.scale{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.scale label{border:1px solid var(--line);border-radius:12px;padding:10px 8px;text-align:center;cursor:pointer;background:#fff}.scale input{margin-right:4px}.scale label:has(input:checked){border-color:var(--accent);background:var(--soft)}
+textarea{width:100%;min-height:120px;border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;resize:vertical}
+.final-choice{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}.final-choice label{border:1px solid var(--line);padding:14px;border-radius:12px;text-align:center;font-weight:700;background:#fff;cursor:pointer}.final-choice label:has(input:checked){border-color:var(--accent);background:var(--soft)}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}.btn{appearance:none;border:0;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.btn-secondary{background:#eef2f7;color:#374151}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.45;cursor:not-allowed}
+.page{display:none}.page.active{display:block}.footer-note{font-size:13px;color:var(--muted);text-align:center;margin-top:18px}
+.submit-box{background:#f9fafb;border:1px dashed #cbd5e1;padding:14px;border-radius:12px;margin-top:14px}.small{font-size:13px;color:var(--muted)}
+@media (max-width:640px){.scale{grid-template-columns:1fr 1fr}.final-choice{grid-template-columns:1fr}.card{padding:17px}.container{padding:14px 12px 36px}.nav{position:sticky;bottom:8px;background:rgba(255,255,255,.96);padding:8px;border-radius:14px;border:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>지역사회 노인 노쇠 측정도구</h1>
+  <p class="lead">K-FRAIL, CKFI, KFS의 내용과 웹 기반 구현 형태를 확인한 후 각 항목의 적절성을 평가해 주십시오.</p>
+</header>
+<div class="progress"><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div></div>
+<form id="delphiForm" action="https://docs.google.com/forms/d/e/1FAIpQLSe59rI0HcXEk7-5v-XTls_4GB_TxlAERQswEhovt9Ee_xa1Qg/formResponse" method="POST" target="hidden_iframe">
+<input type="hidden" name="fvv" value="1">
+<input type="hidden" name="pageHistory" value="0,1,2,3">
+<input type="hidden" name="submissionTimestamp" value="-1">
+
+<section class="page active" data-page="0">
+<div class="card">
+  <div class="section-title"><span class="pill">도구 1</span><h2>FRAIL 척도의 한국어판 (K-FRAIL)</h2></div>
+  <div class="instrument">
+    <div class="instrument-question"><p>1. 지난 한 달 동안 피곤하다고 느낀 적이 있습니까?</p><div class="option-row"><span class="chip">항상 그렇다</span><span class="chip">거의 대부분 그렇다</span><span class="chip">종종 그렇다</span><span class="chip">가끔씩 그렇다</span><span class="chip">전혀 그렇지 않다</span></div></div>
+    <div class="instrument-question"><p>2. 도움이 없이 혼자서 쉬지 않고 10개의 계단을 오르는 데 힘이 듭니까?</p><div class="option-row"><span class="chip">예</span><span class="chip">아니오</span></div></div>
+    <div class="instrument-question"><p>3. 도움이 없이 300미터를 혼자서 이동하는 데 힘이 듭니까?</p><div class="option-row"><span class="chip">예</span><span class="chip">아니오</span></div></div>
+    <div class="instrument-question"><p>4. 의사에게 다음 질병이 있다고 들은 적이 있습니까? (고혈압, 당뇨, 암, 만성 폐질환, 심근경색, 심부전, 협심증, 천식, 관절염, 뇌경색, 신장 질환)</p><div class="option-row"><span class="chip">0~4개</span><span class="chip">5~11개</span></div></div>
+    <div class="instrument-question"><p>5. 현재와 1년 전의 체중은 각각 몇 kg이었습니까?</p><div class="option-row"><span class="chip">5% 이상 감소했다</span><span class="chip">5% 미만 감소했거나 감소하지 않았다</span></div></div>
+  </div>
+  <div class="expert"><h3>K-FRAIL 전문가 평가</h3><div class="scale-note"><strong>응답 기준</strong>1점: 적절하지 않음 · 2점: 수정을 하지 않는 한 적절하다고 하기 어려움 · 3점: 적절한 편이나 약간의 수정이 필요함 · 4점: 매우 적절함</div><div id="kfrailRatings"></div></div>
+  <div class="expert-q"><label class="prompt" for="kfrail16">16. 웹 기반 측정도구의 화면 구성, 글자 및 버튼 크기, 응답 방법, 화면 이동 등에서 개선이 필요하다고 생각하는 부분이 있다면 구체적으로 작성하여 주십시오.</label><textarea id="kfrail16" name="entry.1114467773"></textarea></div>
+  <div class="nav"><span></span><button type="button" class="btn btn-primary" onclick="goTo(1)">다음 도구 →</button></div>
+</div>
+</section>
+
+<section class="page" data-page="1">
+<div class="card">
+  <div class="section-title"><span class="pill">도구 2</span><h2>포괄적 한국 노인 허약 사정 도구 (CKFI)</h2></div>
+  <div class="instrument">
+    <div class="instrument-question"><p>1. 다른 사람 도움이나 보조기 없이 머리보다 높은 곳에 있는 것을 손을 뻗쳐서 닿기 동작을 할 때 어려움을 느끼십니까?</p><div class="option-row"><span class="chip">아니오</span><span class="chip">예</span></div></div>
+    <div class="instrument-question"><p>2. 다른 사람 도움이나 보조기 없이 쉬지 않고 10계단 오르기 동작을 할 때 어려움을 느끼십니까?</p><div class="option-row"><span class="chip">아니오</span><span class="chip">예</span></div></div>
+    <div class="instrument-question"><p>3. 고기나 사과같이 딱딱한 음식을 씹을 때 어려움을 느끼십니까? 틀니를 착용하시는 경우 틀니를 착용한 상태를 기준으로 말씀해 주십시오.</p><div class="option-row"><span class="chip">아니오</span><span class="chip">예</span></div></div>
+    <div class="instrument-question"><p>4. 현재 시력 때문에 일상적인 활동을 하는 데 어려움이 있습니까?</p><div class="option-row"><span class="chip">아니오</span><span class="chip">예</span></div></div>
+    <div class="instrument-question"><p>5. 현재 청력 때문에 일상적인 활동을 하시는 데 어려움이 있습니까?</p><div class="option-row"><span class="chip">아니오</span><span class="chip">예</span></div></div>
+    <div class="instrument-question"><p>6. 현재 3개월 이상 앓으신 의사진단을 받은 만성질환이 3가지 이상이십니까?</p><div class="option-row"><span class="chip">아니오</span><span class="chip">예</span></div></div>
+    <div class="instrument-question"><p>7. 지난 1주일 동안 바깥에 나가기가 싫고 집에만 있고 싶으셨습니까?</p><div class="option-row"><span class="chip">아니오</span><span class="chip">예</span></div></div>
+    <div class="instrument-question"><p>8. 평소에 건강상태는 어떻다고 생각하십니까?</p><div class="option-row"><span class="chip">좋은 편이다</span><span class="chip">그저 그렇다</span><span class="chip">나쁜 편이다</span></div></div>
+    <div class="instrument-question"><p>9. 본인의 기억력이 현재 어떠하다고 생각하십니까?</p><div class="option-row"><span class="chip">좋은 편이다</span><span class="chip">나쁜 편이다</span></div></div>
+    <div class="instrument-question"><p>10. 현재 혼자 살고 계십니까?</p><div class="option-row"><span class="chip">아니오</span><span class="chip">예</span></div></div>
+    <div class="instrument-question"><p>11. 참여하시는 모임(단체 활동)이 있으십니까? (예: 친목, 종교, 문화 활동, 스포츠, 시민 또는 사회, 이익 또는 정치, 봉사, 학습단체)</p><div class="option-row"><span class="chip">예</span><span class="chip">아니오</span></div></div>
+    <div class="instrument-question"><p>12. 관계에 만족하는 주변 사람들이 몇 분이십니까?</p><div class="option-row"><span class="chip">2명 이상</span><span class="chip">1명 이하</span></div></div>
+    <div class="instrument-question"><p>13. 현재부터 1년 전까지 나의 고민이나 걱정거리를 들어준 주변사람들이 몇 분이십니까?</p><div class="option-row"><span class="chip">2명 이상</span><span class="chip">1명 이하</span></div></div>
+    <div class="instrument-question"><p>14. 현재부터 1년 전까지 어르신께서는 가족을 포함한 주변사람들에게 용돈, 생활비 등의 경제적 도움을 몇 번 받으셨습니까?</p><div class="option-row"><span class="chip">1번 이상</span><span class="chip">받은 적 없음</span></div></div>
+  </div>
+  <div class="expert"><h3>CKFI 전문가 평가</h3><div class="scale-note"><strong>응답 기준</strong>1점: 적절하지 않음 · 2점: 수정을 하지 않는 한 적절하다고 하기 어려움 · 3점: 적절한 편이나 약간의 수정이 필요함 · 4점: 매우 적절함</div><div id="ckfiRatings"></div></div>
+  <div class="expert-q"><label class="prompt" for="ckfi16">16. 웹 기반 측정도구의 화면 구성, 글자 및 버튼 크기, 응답 방법, 화면 이동 등에서 개선이 필요하다고 생각하는 부분이 있다면 구체적으로 작성하여 주십시오.</label><textarea id="ckfi16" name="entry.1111482202"></textarea></div>
+  <div class="nav"><button type="button" class="btn btn-secondary" onclick="goTo(0)">← 뒤로가기</button><button type="button" class="btn btn-primary" onclick="goTo(2)">다음 도구 →</button></div>
+</div>
+</section>
+
+<section class="page" data-page="2">
+<div class="card">
+  <div class="section-title"><span class="pill">도구 3</span><h2>한국형 노쇠 척도 (KFS)</h2></div>
+  <div class="instrument">
+    <div class="instrument-question"><p><strong>신체적 노쇠</strong></p><p>1. 지난 1년 동안 특별한 이유 없이 체중이 4.5kg 이상 또는 기존 체중의 5% 이상 감소하였습니까?</p><div class="option-row"><span class="chip">예</span><span class="chip">아니오</span></div></div>
+    <div class="instrument-question"><p>2. 현재 자신의 건강상태를 어떻게 생각하십니까?</p><div class="option-row"><span class="chip">나쁘다</span><span class="chip">나쁘지 않다</span></div></div>
+    <div class="instrument-question"><p><strong>심리적 노쇠</strong></p><p>3. 지난 4주 동안 얼마나 자주 피곤함을 느끼셨습니까?</p><div class="option-row"><span class="chip">항상 그렇다</span><span class="chip">대부분 그렇다</span><span class="chip">가끔 그렇다</span><span class="chip">조금 그렇다</span><span class="chip">전혀 그렇지 않다</span></div></div>
+    <div class="instrument-question"><p>4. 활력이나 의욕이 없어 평소 하던 활동이나 관심사를 많이 줄이셨습니까?</p><div class="option-row"><span class="chip">예</span><span class="chip">아니오</span></div></div>
+    <div class="instrument-question"><p><strong>사회적 노쇠</strong></p><p>5. 친구를 만나거나 이야기하는 빈도는 어느 정도입니까?</p><div class="option-row"><span class="chip">매일</span><span class="chip">주 2~3회</span><span class="chip">주 1회 이상</span><span class="chip">월 1회 이상</span><span class="chip">월 1회 미만</span><span class="chip">친구가 없음</span></div></div>
+    <div class="instrument-question"><p>6. 친밀하고 의지할 수 있는 사람과 원하는 만큼 연락하고 계십니까?</p><div class="option-row"><span class="chip">전혀 그렇지 않다</span><span class="chip">거의 그렇지 않다</span><span class="chip">가끔 그렇다</span><span class="chip">대부분 그렇다</span><span class="chip">항상 그렇다</span></div></div>
+  </div>
+  <div class="expert"><h3>KFS 전문가 평가</h3><div class="scale-note"><strong>응답 기준</strong>1점: 적절하지 않음 · 2점: 수정을 하지 않는 한 적절하다고 하기 어려움 · 3점: 적절한 편이나 약간의 수정이 필요함 · 4점: 매우 적절함</div><div id="kfsRatings"></div></div>
+  <div class="expert-q"><label class="prompt" for="kfs16">16. 웹 기반 측정도구의 화면 구성, 글자 및 버튼 크기, 응답 방법, 화면 이동 등에서 개선이 필요하다고 생각하는 부분이 있다면 구체적으로 작성하여 주십시오.</label><textarea id="kfs16" name="entry.1087185980"></textarea></div>
+  <div class="nav"><button type="button" class="btn btn-secondary" onclick="goTo(1)">← 뒤로가기</button><button type="button" class="btn btn-primary" onclick="goTo(3)">종합 평가 →</button></div>
+</div>
+</section>
+
+<section class="page" data-page="3">
+<div class="card">
+  <div class="section-title"><span class="pill">마지막</span><h2>종합 평가</h2></div>
+  <div class="expert-q"><label class="prompt">17. 앞서 평가한 문항의 이해성, 내용의 적절성, 대상자의 응답 용이성, 현장 적용 가능성 등을 종합적으로 고려할 때, 지역사회 노인의 노쇠 평가에 가장 적절하다고 생각하는 도구를 하나 선택해 주십시오.</label>
+    <div class="final-choice">
+      <label><input type="radio" name="entry.1371312703" value="K-FRAIL" required> K-FRAIL</label>
+      <label><input type="radio" name="entry.1371312703" value="CKFI"> CKFI</label>
+      <label><input type="radio" name="entry.1371312703" value="KFS"> KFS</label>
+    </div>
+  </div>
+  <div class="expert-q"><label class="prompt" for="final17_1">17-1. 선택한 도구가 다른 두 도구보다 적절하다고 판단한 이유를 구체적으로 작성하여 주십시오.</label><textarea id="final17_1" name="entry.1748548375"></textarea></div>
+  <div class="submit-box"><strong>응답 제출</strong><div class="small">응답 제출 버튼을 누르면 입력한 내용이 Google Forms에 저장됩니다.</div></div>
+  <div class="nav"><button type="button" class="btn btn-secondary" onclick="goTo(2)">← 뒤로가기</button><button type="submit" class="btn btn-primary">응답 제출</button></div>
+</div>
+</section>
+</form>
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none"></iframe>
+<p class="footer-note">연구용 델파이 조사 시범 페이지</p>
+</div>
+<script>
+const common = [
+  tool => `${tool}은 지역사회 노인의 노쇠를 평가하기에 적절하다.`,
+  () => `웹 기반으로 구현된 측정도구는 원래 측정도구의 내용을 적절히 반영하고 있다.`,
+  () => `웹 기반 측정도구는 지역사회 노인에게 적용하기 적절하다.`,
+  () => `웹 기반 측정도구는 지역사회 노인의 건강상태를 파악하기에 적절하다.`,
+  () => `웹 기반 측정도구는 노쇠 고위험군을 선별하기에 적절하다.`,
+  () => `웹 기반 측정도구는 노인이 이해하기 쉬운 표현으로 구성되어 있다.`,
+  () => `웹 기반 측정도구의 문항 수는 적절하다.`,
+  () => `웹 기반 측정도구의 화면 구성은 이해하기 쉽다.`,
+  () => `웹 기반 측정도구의 글자 크기는 적절하다.`,
+  () => `웹 기반 측정도구의 버튼 크기는 적절하다.`,
+  () => `웹 기반 측정도구의 응답 과정은 직관적이다.`,
+  () => `웹 기반 측정도구는 휴대전화에서 사용하기 적절하다.`,
+  () => `웹 기반 측정도구는 지역사회 노인이 스스로 응답하기 적절하다.`,
+  () => `웹 기반 측정도구는 지역사회 현장(예: 보건소, 복지관 등)에서 노인의 노쇠를 평가하는 데 활용하기 적절하다.`,
+  () => `웹 기반 측정도구는 향후 노쇠 관리 프로그램에 활용 가능성이 높다.`
+];
+const entryIds = {
+  "K-FRAIL": [261253188, 2045432866, 440348384, 1194546110, 1788730513, 1724020426, 210670835, 871687278, 1587926528, 940997252, 1978825067, 138033329, 606444554, 640292525, 79229317],
+  "CKFI": [612153049, 926607716, 2132074365, 1813050809, 818876466, 770135180, 1591501773, 1399292169, 2070121209, 1584163016, 312361564, 502128827, 2007359888, 808535112, 2076715788],
+  "KFS": [1359711955, 10105382, 9544440, 425636896, 881716955, 665311767, 871813791, 727759691, 315501800, 1045976086, 1470407117, 1083473538, 803154912, 2102938121, 1512935416]
+};
+function renderRatings(targetId, tool){
+  const el=document.getElementById(targetId);
+  common.forEach((fn,i)=>{
+    const n=i+1;
+    const entryId=entryIds[tool][i];
+    const wrap=document.createElement('div'); wrap.className='expert-q';
+    wrap.innerHTML=`<label class="prompt">${n}. ${fn(tool)}</label><div class="scale">${[1,2,3,4].map(v=>`<label><input type="radio" name="entry.${entryId}" value="${v}" required> ${v}점</label>`).join('')}</div>`;
+    el.appendChild(wrap);
+  });
+}
+renderRatings('kfrailRatings','K-FRAIL');
+renderRatings('ckfiRatings','CKFI');
+renderRatings('kfsRatings','KFS');
+const pages=[...document.querySelectorAll('.page')];
+function goTo(i){pages.forEach((p,idx)=>p.classList.toggle('active',idx===i));document.getElementById('progressFill').style.width=((i+1)/pages.length*100)+'%';window.scrollTo({top:0,behavior:'smooth'});}
+goTo(0);
+let submitted=false;
+document.getElementById('delphiForm').addEventListener('submit',e=>{
+  submitted=true;
+  setTimeout(()=>{
+    alert('응답이 제출되었습니다. 감사합니다.');
+    document.getElementById('delphiForm').reset();
+    goTo(0);
+  },700);
+});
+</script>
+</body>
+</html>
