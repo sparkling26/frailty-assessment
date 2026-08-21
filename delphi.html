@@ -1,67 +1,132 @@
 <!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>지역사회 노인 노쇠 측정도구</title>
-<style>
-:root{--bg:#f6f7f9;--card:#fff;--text:#1f2937;--muted:#6b7280;--line:#e5e7eb;--accent:#2563eb;--soft:#eff6ff;--danger:#b91c1c}
-*{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
-.container{max-width:980px;margin:0 auto;padding:24px 16px 56px}
-header{background:linear-gradient(135deg,#fff,#f8fbff);border:1px solid var(--line);border-radius:18px;padding:24px;margin-bottom:18px}
-h1{font-size:clamp(25px,4vw,38px);margin:0 0 8px}.lead{margin:0;color:var(--muted)}
-.notice{margin-top:14px;background:#fff7ed;border:1px solid #fed7aa;padding:12px 14px;border-radius:12px;font-size:14px}
-.progress{position:sticky;top:0;z-index:20;background:rgba(246,247,249,.94);backdrop-filter:blur(8px);padding:10px 0 12px;margin-bottom:6px}
-.progress-bar{height:8px;background:#e5e7eb;border-radius:999px;overflow:hidden}.progress-fill{height:100%;width:0;background:var(--accent);transition:.2s}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 6px 24px rgba(0,0,0,.03)}
-.section-title{display:flex;gap:10px;align-items:center;margin:0 0 14px}.pill{font-size:12px;font-weight:700;background:var(--soft);color:var(--accent);padding:5px 9px;border-radius:999px}
-h2{font-size:23px;margin:0}.instrument h3,.expert h3{font-size:18px;margin:20px 0 10px}.instrument-question{padding:14px 0;border-top:1px solid var(--line)}.instrument-question:first-of-type{border-top:0}.instrument-question p{margin:0 0 9px;font-weight:600}
-.option-row{display:flex;flex-wrap:wrap;gap:8px}.chip{border:1px solid var(--line);border-radius:12px;padding:9px 11px;background:#fafafa;font-size:14px}
-.scale-note{background:#f9fafb;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;margin:12px 0 18px}.scale-note strong{display:block;margin-bottom:5px}
-.expert-q{padding:16px 0;border-top:1px solid var(--line)}.expert-q:first-of-type{border-top:0}.expert-q label.prompt{display:block;font-weight:700;margin-bottom:10px}
-.scale{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.scale label{border:1px solid var(--line);border-radius:12px;padding:10px 8px;text-align:center;cursor:pointer;background:#fff}.scale input{margin-right:4px}.scale label:has(input:checked){border-color:var(--accent);background:var(--soft)}
-textarea{width:100%;min-height:120px;border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;resize:vertical}
-.final-choice{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}.final-choice label{border:1px solid var(--line);padding:14px;border-radius:12px;text-align:center;font-weight:700;background:#fff;cursor:pointer}.final-choice label:has(input:checked){border-color:var(--accent);background:var(--soft)}
-.nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}.btn{appearance:none;border:0;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.btn-secondary{background:#eef2f7;color:#374151}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.45;cursor:not-allowed}
-.page{display:none}.page.active{display:block}.footer-note{font-size:13px;color:var(--muted);text-align:center;margin-top:18px}
-.submit-box{background:#f9fafb;border:1px dashed #cbd5e1;padding:14px;border-radius:12px;margin-top:14px}.small{font-size:13px;color:var(--muted)}
-@media (max-width:640px){.scale{grid-template-columns:1fr 1fr}.final-choice{grid-template-columns:1fr}.card{padding:17px}.container{padding:14px 12px 36px}.nav{position:sticky;bottom:8px;background:rgba(255,255,255,.96);padding:8px;border-radius:14px;border:1px solid var(--line)}}
-</style>
-</head>
-<body>
-<div class="container">
-<header>
-  <h1>지역사회 노인 노쇠 측정도구</h1>
-  <p class="lead">K-FRAIL, CKFI, KFS의 내용과 웹 기반 구현 형태를 확인한 후 각 항목의 적절성을 평가해 주십시오.</p>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>지역사회 노인 노쇠 측정도구 전문가 평가</title><style>
+:root{--bg:#f6f7f9;--card:#fff;--text:#1f2937;--muted:#6b7280;--line:#e5e7eb;--accent:#2563eb;--soft:#eff6ff}
+*{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.container{max-width:980px;margin:0 auto;padding:24px 16px 56px} header{background:linear-gradient(135deg,#fff,#f8fbff);border:1px solid var(--line);border-radius:18px;padding:24px;margin-bottom:18px}
+h1{font-size:clamp(25px,4vw,38px);margin:0 0 8px}
+.progress{position:sticky;top:0;z-index:20;background:rgba(246,247,249,.94);backdrop-filter:blur(8px);padding:10px 0 12px;margin-bottom:6px}.progress-bar{height:8px;background:#e5e7eb;border-radius:999px;overflow:hidden}.progress-fill{height:100%;width:0;background:var(--accent)}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 6px 24px rgba(0,0,0,.03)}
+.section-title{display:flex;gap:10px;align-items:center;margin:0 0 14px}.pill{font-size:12px;font-weight:700;background:var(--soft);color:var(--accent);padding:5px 9px;border-radius:999px} h2{font-size:23px;margin:0}
+.info-section{padding:8px 0 14px;border-bottom:1px solid var(--line)}.info-section:last-child{border:0}.info-section h3{margin:12px 0 6px}.info-section h4{margin:12px 0 4px;font-size:16px}.info-section p{margin:5px 0}.research-title{background:#f9fafb;border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin:0 0 18px}.career-help{font-size:15px;color:var(--text);font-weight:600;margin-top:12px}.expert-title{font-size:23px;margin:26px 0 5px}.expert-guide{font-size:15px;font-weight:700;margin:4px 0 14px}
+.field{margin:18px 0}.field>label,.prompt{display:block;font-weight:700;margin-bottom:8px} input[type=text],input[type=number]{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px;font:inherit}
+.inline-radio{display:flex;gap:10px;flex-wrap:wrap}.inline-radio label{border:1px solid var(--line);border-radius:10px;padding:10px 14px;background:#fff}
+.page-intro{font-size:17px;font-weight:650;margin:4px 0 16px}.instrument-box{border:2px solid #dbe3ee;border-radius:16px;padding:16px;margin:18px 0;background:#fcfdff}
+.instrument-question{padding:14px 0;border-top:1px solid var(--line)}.instrument-question:first-child{border-top:0}.instrument-question p{margin:0 0 9px;font-weight:600}.option-row{display:flex;flex-wrap:wrap;gap:8px}.chip{border:1px solid var(--line);border-radius:12px;padding:9px 11px;background:#fafafa;font-size:14px}
+.platform-box{border:1px solid var(--line);border-radius:14px;padding:15px;text-align:center;background:#f9fafb}.platform-box p{margin:5px 0 10px}.qr{display:block;width:150px;height:150px;margin:8px auto}.platform-link{display:block;overflow-wrap:anywhere}
+.expert h3{font-size:18px;margin:22px 0 10px}.scale-note{background:#fffbea;border:2px solid #f4c95d;border-radius:14px;padding:16px 17px;font-size:16px;margin:12px 0 20px;box-shadow:0 3px 10px rgba(0,0,0,.04)}.scale-note strong{display:block;font-size:18px;margin-bottom:8px}.scale-guide{display:grid;gap:6px}.scale-guide span{display:block;padding:7px 9px;border-radius:8px}.guide-1{background:#fdecec}.guide-2{background:#fff1df}.guide-3{background:#fff8d8}.guide-4{background:#e7f7ea}
+.expert-q{padding:16px 0;border-top:1px solid var(--line)}.scale{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.scale label{border:1px solid var(--line);border-radius:12px;padding:10px 8px;text-align:center;cursor:pointer}.scale label:has(input:checked).score-1{background:#fdecec;color:#7f1d1d;border-color:#f5b5b5}.scale label:has(input:checked).score-2{background:#fff1df;color:#8a4b08;border-color:#f5c98f}.scale label:has(input:checked).score-3{background:#fff8d8;color:#725f00;border-color:#eadb84}.scale label:has(input:checked).score-4{background:#e7f7ea;color:#166534;border-color:#a9dfb0}
+textarea{width:100%;min-height:110px;border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;resize:vertical}.comment-box{margin-top:10px}.comment-box textarea{min-height:58px;background:white}
+.final-choice{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}.final-choice label{border:1px solid var(--line);padding:14px;border-radius:12px;text-align:center;font-weight:700}.final-choice label:has(input:checked){border-color:var(--accent);background:var(--soft)}.choice-korean{font-weight:800;font-size:16px;display:block}.choice-code{font-size:13px;color:var(--muted);display:block;margin-top:3px}.validation-message{display:none;color:#b91c1c;font-size:14px;font-weight:700;margin-top:7px}textarea:invalid.touched{border-color:#b91c1c}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}.btn{border:0;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}.btn-secondary{background:#eef2f7;color:#374151}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.45}.page{display:none}.page.active{display:block}.small{font-size:13px;color:var(--muted)}.bottom-guide{text-align:center;margin-top:16px}.footer-note{font-size:13px;color:var(--muted);text-align:center}
+.consent-list{padding-left:22px}.consent-list li{margin:9px 0}.consent-choice{background:#f9fafb;border:1px solid var(--line);padding:15px;border-radius:12px}
+@media(max-width:640px){.scale{grid-template-columns:1fr 1fr}.final-choice{grid-template-columns:1fr}.education-row{grid-template-columns:1fr 1fr}.education-other-input{grid-column:1/-1}.card{padding:17px}.container{padding:14px 12px 36px}}
+</style></head>
+<body><div class="container"><header><h1>지역사회 노인 노쇠 측정도구 전문가 평가</h1>
 </header>
 <div class="progress"><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div></div>
-<form id="delphiForm" action="https://docs.google.com/forms/d/e/1FAIpQLSe59rI0HcXEk7-5v-XTls_4GB_TxlAERQswEhovt9Ee_xa1Qg/formResponse" method="POST" target="hidden_iframe">
-<input type="hidden" name="fvv" value="1">
-<input type="hidden" name="pageHistory" value="0,1,2,3">
-<input type="hidden" name="submissionTimestamp" value="-1">
-
-<section class="page active" data-page="0">
-<div class="card">
-  <div class="section-title"><span class="pill">도구 1</span><h2>FRAIL 척도의 한국어판 (K-FRAIL)</h2></div>
-  <div class="instrument">
-    <div class="instrument-question"><p>1. 지난 한 달 동안 피곤하다고 느낀 적이 있습니까?</p><div class="option-row"><span class="chip">항상 그렇다</span><span class="chip">거의 대부분 그렇다</span><span class="chip">종종 그렇다</span><span class="chip">가끔씩 그렇다</span><span class="chip">전혀 그렇지 않다</span></div></div>
+<form id="delphiForm" novalidate action="https://docs.google.com/forms/d/e/1FAIpQLSe59rI0HcXEk7-5v-XTls_4GB_TxlAERQswEhovt9Ee_xa1Qg/formResponse" method="POST" target="hidden_iframe">
+<input type="hidden" name="fvv" value="1"><input type="hidden" name="pageHistory" value="0,1,2,3,4,5,6"><input type="hidden" name="submissionTimestamp" value="-1">
+<section class="page active" data-page="0"><div class="card">
+<div class="section-title"><h2>설명서</h2></div>
+<p class="page-intro">아래 설명서를 읽고 연구 참여와 관련하여 동의 여부를 결정해 주십시오.</p>
+<div class="research-title"><strong>연구제목:</strong> 지역사회 노인을 위한 디지털 노쇠평가 플랫폼의 내용타당도 및 사용성 평가</div>
+<div class="info-section"><h3>1. 연구 배경과 목적</h3><h4>연구 배경</h4><p>노쇠(frailty)는 노화에 따른 생리적 예비능의 감소로 외부 스트레스에 대한 취약성이 증가한 상태로, 낙상, 기능저하, 입원, 장기요양시설 입소 및 사망 등 다양한 부정적 건강결과와 관련됩니다. 노쇠는 장애로 진행되기 전에 조기에 발견하고 적절한 중재를 제공함으로써 진행을 지연시키거나 일부 회복할 수 있어 지역사회 노인을 대상으로 조기에 선별하고 지속적으로 관리하는 것이 중요합니다.</p><p>본 연구에서는 문헌검토를 통해 선정한 FRAIL 척도의 한국어판(K-FRAIL), 포괄적 한국 노인 허약 사정 도구(CKFI), 한국형 노쇠 척도(KFS)을 웹 기반 자기기입식 플랫폼에 구현하였습니다.</p><h4>연구 목적</h4><p>본 전문가 평가의 목적은 세 노쇠평가도구의 지역사회 디지털 자기기입 환경에 대한 적용 적합성과 플랫폼 구현 내용의 타당도를 확인하는 것입니다. <strong>본 연구는 기존 노쇠평가도구의 원래 심리측정학적 타당도를 재검증하거나 도구의 문항 및 채점체계를 변경하기 위한 연구가 아닙니다.</strong> 전문가 평가 결과는 이후 플랫폼의 문항 제시 방식, 응답형식, 화면 구성, 안내 문구 및 결과 제시 방식을 수정·보완하는 데 활용됩니다.</p></div>
+<div class="info-section"><h3>2. 연구 참여 대상</h3><p>전문가 10명의 완료 자료 확보를 목표로 하며, 중도철회 또는 불완전 응답 가능성을 고려하여 최대 12명에게 참여를 요청합니다.</p></div>
+<div class="info-section"><h3>3. 연구 수행방법</h3><p>본 연구는 비대면 온라인 방식으로 진행됩니다. 온라인 연구설명문을 읽고 연구 참여에 동의하시면 연구자가 제공하는 웹 기반 플랫폼에 접속하여 K-FRAIL, CKFI 및 KFS의 구성과 구현 화면을 확인하게 됩니다. 세 도구의 문항 제시 방식, 응답 선택 방식, 화면 이동 및 결과 제시 과정을 검토한 후 전문가용 평가서에 응답합니다.</p><p>각 평가항목은 4점 척도로 평가하며, 필요한 경우 수정 또는 보완이 필요하다고 생각하는 부분에 대한 의견을 자유롭게 작성합니다.</p></div>
+<div class="info-section"><h3>4. 연구 참여 시간</h3><p>전문가 평가는 온라인으로 1회 실시하며, 웹 기반 플랫폼 검토와 평가서 작성을 포함하여 약 60분이 소요될 예정입니다.</p></div>
+<div class="info-section"><h3>5. 연구참여에 따른 위험 및 이익</h3><p>본 연구는 약물 투여, 침습적 검사 또는 신체적 처치를 포함하지 않는 최소위험 연구입니다. 전문가 참여자는 약 60분의 평가로 시간적 부담이나 피로감을 경험할 수 있으며 자신의 전문적 판단을 제시하는 과정에서 심리적 부담을 느낄 가능성이 있습니다.</p><p>본 연구에 참여함으로써 직접적인 의학적 이익이 제공되는 것은 아니지만, 귀하의 전문적 의견은 지역사회 노인이 사용할 수 있는 디지털 노쇠평가 플랫폼의 개선에 활용될 수 있습니다.</p></div>
+<div class="info-section"><h3>6. 사례비</h3><p>전문가에게는 온라인 평가에 소요되는 시간과 전문적 검토에 대한 사례비로 평가 1회 완료 후 1인당 10만 원을 지급합니다. 온라인 동의 후 연구절차를 시작하였다가 중도철회하거나 연구자가 안전상의 이유로 연구를 중단한 경우에도 정해진 사례비 전액을 지급합니다.</p></div>
+<div class="info-section"><h3>7. 개인정보 보호</h3><p>성명, 연락처 또는 전자우편 주소, 온라인 동의 여부 및 동의 일시, 연령 또는 연령대, 성별, 최종 학력, 전공 분야, 현재 직종 및 직위, 총 연구 또는 실무경력, 내용타당도 평가 응답 및 서술형 의견을 수집합니다. 분석자료에는 성명 대신 연구번호를 사용하며 수집된 개인정보와 연구자료는 본 연구목적에만 사용합니다.</p></div>
+<div class="info-section"><h3>8. 자발적 참여 및 동의 철회</h3><p>본 연구에 참여할지는 전적으로 귀하가 자유롭게 결정할 수 있습니다. 연구 참여를 거부하더라도 어떠한 불이익도 없습니다. 온라인 동의 후에도 평가 완료 전까지 언제든지 참여를 중단하거나 철회할 수 있으며 이에 따른 어떠한 불이익도 없습니다.</p></div>
+<div class="info-section"><h3>9. 자료 보관 및 폐기</h3><p>본 연구에서 수집한 온라인 동의기록, 대상자 식별코드, 일반적 특성 조사자료, 전문가 평가자료 및 분석자료는 연구 종료 후 3년간 보관합니다. 보관기간 종료 후 종이자료는 파쇄하고 전자자료는 복구할 수 없는 방법으로 영구 삭제합니다.</p></div>
+<div class="info-section"><h3>10. 문의처</h3><p>이 연구는 한양대학교 기관생명윤리위원회(IRB)에 의해 승인되었으며, 연구에 대한 문의사항이 있거나 위험이나 불편함이 발생할 경우, 아래 연구책임자에게 연락하여 주시기 바랍니다.</p><p><strong>연구책임자:</strong> 이한이 교수 (한양대학교 간호대학 간호학과) / 010-6695-3177</p><p><strong>기타 문의:</strong> 한양대학교 기관생명윤리위원회 / 02-2220-0673</p></div>
+<div class="nav"><span></span><button type="button" class="btn btn-primary" onclick="goTo(1)">다음: 동의서 →</button></div></div></section><section class="page" data-page="1"><div class="card">
+<div class="section-title"><h2>동의서</h2></div>
+<ol class="consent-list"><li>나는 본 연구의 설명서를 읽었으며 본 연구의 목적, 방법, 위험, 이익 등에 대한 충분한 설명을 듣고 이해하였습니다.</li><li>나는 모든 궁금한 사항에 대해 질문하였고, 충분한 답변을 들었습니다.</li><li>나는 이 연구에 참여하는 것에 대하여 자발적으로 동의합니다.</li><li>나는 이 연구에서 얻어진 나에 대한 정보를 현행 법률과 기관생명윤리위원회 규정이 허용하는 범위 내에서 연구자가 수집하고 처리하는데 동의합니다.</li><li>나는 담당 연구자가 연구를 진행하거나 결과 관리를 하는 경우와 연구기관, 연구비지원기관 및 정부기관이 실태 조사를 하는 경우에는 비밀로 유지되는 나의 개인 신상 정보를 직접적으로 열람하는 것에 동의합니다.</li><li>나는 언제라도 이 연구의 참여를 철회할 수 있고 이러한 결정이 나에게 어떠한 해도 되지 않을 것이라는 것을 압니다.</li><li>나의 동의는 이 동의서의 사본을 받았다는 것을 뜻하며 연구 참여가 끝날 때까지 사본을 보관하겠습니다.</li></ol>
+<div class="field"><label for="participantName">성명</label><input id="participantName" name="entry.248936267" type="text" required></div>
+<div class="consent-choice"><strong>연구 참여 동의</strong><div class="inline-radio">
+<label><input type="radio" name="entry.1869546749" value="동의합니다" onchange="updateConsent()" required> 동의합니다.</label>
+<label><input type="radio" name="entry.1869546749" value="동의하지 않습니다" onchange="updateConsent()"> 동의하지 않습니다.</label></div>
+<input type="hidden" id="consentTime" name="entry.1373103581"></div>
+<div class="nav"><button type="button" class="btn btn-secondary" onclick="goTo(0)">← 뒤로가기</button><button id="consentNext" type="button" class="btn btn-primary" onclick="recordConsentAndNext()" disabled>다음: 기본 정보 →</button></div></div></section><section class="page" data-page="2"><div class="card">
+<div class="section-title"><h2>기본 정보</h2></div>
+<div class="field"><label>1. 연령</label><div style="display:flex;align-items:center;gap:8px"><span>만</span><input type="text" inputmode="numeric" pattern="[0-9]*" name="entry.1244902540" style="max-width:160px"><span>세</span></div></div>
+<div class="field"><label>2. 성별</label><div class="inline-radio"><label><input type="radio" name="entry.337798233" value="여성"> 여성</label><label><input type="radio" name="entry.337798233" value="남성"> 남성</label></div></div>
+<div class="field"><label>3. 최종 학력</label><div class="inline-radio"><label><input type="radio" name="entry.884235450" value="학사"> 학사</label><label><input type="radio" name="entry.884235450" value="석사"> 석사</label><label><input type="radio" name="entry.884235450" value="박사"> 박사</label><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><label><input type="radio" name="entry.884235450" value="기타"> 기타</label><input type="text" name="entry.31066237" placeholder="직접 입력" style="max-width:260px"></div></div></div>
+<div class="field"><label>4. 전공 분야</label><input type="text" name="entry.685699488"></div>
+<div class="field"><label>5. 현재 직종 및 직위</label><input type="text" name="entry.342110159"></div>
+<div class="field"><label>6. 총 연구 또는 실무경력</label><div style="display:flex;align-items:center;gap:8px"><span>총</span><input type="text" inputmode="decimal" name="entry.287118961" style="max-width:160px"><span>년</span></div>
+<div class="career-help">경력에 대해 추가로 작성하실 내용이 있다면 자유롭게 작성해 주십시오. (선택)</div><textarea name="entry.1329129444" style="min-height:85px"></textarea></div>
+<div class="nav"><button type="button" class="btn btn-secondary" onclick="goTo(1)">← 뒤로가기</button><button type="button" class="btn btn-primary" onclick="goTo(3)">다음: K-FRAIL 평가 →</button></div></div></section><section class="page" data-page="3"><div class="card">
+<div class="section-title"><span class="pill">도구 1</span><h2>FRAIL 척도의 한국어판 (K-FRAIL)</h2></div>
+<p class="page-intro">다음은 FRAIL 척도의 한국어판(K-FRAIL)의 디지털 플랫폼입니다. 웹 기반 구현 형태를 확인하신 후 각 항목의 적절성을 평가해 주십시오.</p>
+<div class="platform-box">
+<p>아래 QR코드 또는 링크를 통해 실제 플랫폼 화면을 확인하실 수 있습니다.</p>
+<img class="qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATgAAAE4AQAAAADnBNLHAAACAklEQVR4nO2a227DMAxDeYb+/y9zD5Ic92FtgA2TCtgNmjohEIuQdWGKdWt83YMd3MEd3D/iHpKInxYWVlyJWd0Zb0cnfyrOhCwhWyDvd6bb0cpf+Fs6HOaJzOBwuh0jcGBkGdl+gfvr534w7vE0MxnykM1O4XQ7evlLpiyZtZO93RlvRyt/1AxjhCMKXgl4vh2d/O371PWN2e9Mt6MLV76mqPjIs8oXdfLvW1ywZoLNKGIg8od16r+Xw7bla9/GyY5vywGZbkcnDmFkl/9ZAomsotvXNxmX/RsSMqba3jyvHDLdjm6c5fLDaoKRcLTC/eubiqMSRLjeVbUQJJYHTrejt35R6Vbpf6ts9tEP7uBgUwFtLMcRWlb7+objqAomo2Bu6IiC9K9vMK7C3AqCRChckTHSyXg7WvtfNqL2Nk7Ksma+Hb35N4XmrfQLDcun/nsz4v1R+FuMVTaHCJhd8XQ7mvuP1O4rHKbjWTrx7/VY+v1ytpzmnpaO/70cpbHUcV0oMcY6+suPI/Tnoo4rCoYUU9rqeDt684ckyeuvB2vzst4hTbejPX8IYVcaxtX6nvrvBg6yVs5PStKwupHPsKMbF3ThItSu6nDG+qbjIolE9kUShA4zZX3zcPv/D0p53pX7UgKn29HKX9XJ8f4Ir9eYazbejlb9oOG5B3dwB/d73DdrJQhnowrKpQAAAABJRU5ErkJggg==" alt="K-FRAIL 플랫폼 QR코드">
+<a class="platform-link" href="https://sparkling26.github.io/frailty-assessment/index.html" target="_blank" rel="noopener">https://sparkling26.github.io/frailty-assessment/index.html</a></div>
+<div class="instrument-box"><div class="instrument"><div class="instrument-question"><p>1. 지난 한 달 동안 피곤하다고 느낀 적이 있습니까?</p><div class="option-row"><span class="chip">항상 그렇다</span><span class="chip">거의 대부분 그렇다</span><span class="chip">종종 그렇다</span><span class="chip">가끔씩 그렇다</span><span class="chip">전혀 그렇지 않다</span></div></div>
     <div class="instrument-question"><p>2. 도움이 없이 혼자서 쉬지 않고 10개의 계단을 오르는 데 힘이 듭니까?</p><div class="option-row"><span class="chip">예</span><span class="chip">아니오</span></div></div>
     <div class="instrument-question"><p>3. 도움이 없이 300미터를 혼자서 이동하는 데 힘이 듭니까?</p><div class="option-row"><span class="chip">예</span><span class="chip">아니오</span></div></div>
     <div class="instrument-question"><p>4. 의사에게 다음 질병이 있다고 들은 적이 있습니까? (고혈압, 당뇨, 암, 만성 폐질환, 심근경색, 심부전, 협심증, 천식, 관절염, 뇌경색, 신장 질환)</p><div class="option-row"><span class="chip">0~4개</span><span class="chip">5~11개</span></div></div>
-    <div class="instrument-question"><p>5. 현재와 1년 전의 체중은 각각 몇 kg이었습니까?</p><div class="option-row"><span class="chip">5% 이상 감소했다</span><span class="chip">5% 미만 감소했거나 감소하지 않았다</span></div></div>
-  </div>
-  <div class="expert"><h3>K-FRAIL 전문가 평가</h3><div class="scale-note"><strong>응답 기준</strong>1점: 적절하지 않음 · 2점: 수정을 하지 않는 한 적절하다고 하기 어려움 · 3점: 적절한 편이나 약간의 수정이 필요함 · 4점: 매우 적절함</div><div id="kfrailRatings"></div></div>
-  <div class="expert-q"><label class="prompt" for="kfrail16">16. 웹 기반 측정도구의 화면 구성, 글자 및 버튼 크기, 응답 방법, 화면 이동 등에서 개선이 필요하다고 생각하는 부분이 있다면 구체적으로 작성하여 주십시오.</label><textarea id="kfrail16" name="entry.1114467773"></textarea></div>
-  <div class="nav"><span></span><button type="button" class="btn btn-primary" onclick="goTo(1)">다음 도구 →</button></div>
-</div>
-</section>
+    <div class="instrument-question"><p>5. 현재와 1년 전의 체중은 각각 몇 kg이었습니까?</p><div class="option-row"><span class="chip">5% 이상 감소했다</span><span class="chip">5% 미만 감소했거나 감소하지 않았다</span></div></div></div></div>
+<div class="expert"><h3 class="expert-title">FRAIL 척도의 한국어판(K-FRAIL) 전문가 평가</h3><p class="expert-guide">※ 실제 플랫폼 화면을 확인하신 후 전문가 평가에 응답해 주십시오.</p><div class="scale-note"><strong>응답 기준</strong><div class="scale-guide"><span class="guide-1">1점: 적절하지 않음</span><span class="guide-2">2점: 수정을 하지 않는 한 적절하다고 하기 어려움</span><span class="guide-3">3점: 적절한 편이나 약간의 수정이 필요함</span><span class="guide-4">4점: 매우 적절함</span></div></div>
+<div class="expert-q"><label class="prompt">1. K-FRAIL은 지역사회 노인의 노쇠를 평가하기에 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.261253188" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.261253188" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.261253188" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.261253188" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.2070635167" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">2. 웹 기반으로 구현된 측정도구는 원래 측정도구의 내용을 적절히 반영하고 있다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.2045432866" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.2045432866" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.2045432866" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.2045432866" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1112396714" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">3. 웹 기반 측정도구는 지역사회 노인에게 적용하기 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.440348384" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.440348384" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.440348384" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.440348384" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.249720426" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">4. 웹 기반 측정도구는 지역사회 노인의 건강상태를 파악하기에 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.1194546110" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.1194546110" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.1194546110" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.1194546110" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.341517207" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">5. 웹 기반 측정도구는 노쇠 고위험군을 선별하기에 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.1788730513" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.1788730513" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.1788730513" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.1788730513" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1925108469" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">6. 웹 기반 측정도구는 노인이 이해하기 쉬운 표현으로 구성되어 있다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.1724020426" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.1724020426" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.1724020426" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.1724020426" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1692974821" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">7. 웹 기반 측정도구의 문항 수는 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.210670835" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.210670835" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.210670835" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.210670835" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.56847746" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">8. 웹 기반 측정도구의 화면 구성은 이해하기 쉽다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.871687278" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.871687278" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.871687278" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.871687278" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.2129884253" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">9. 웹 기반 측정도구의 글자 크기는 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.1587926528" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.1587926528" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.1587926528" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.1587926528" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.2001981320" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">10. 웹 기반 측정도구의 버튼 크기는 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.940997252" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.940997252" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.940997252" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.940997252" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.44775170" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">11. 웹 기반 측정도구의 응답 과정은 직관적이다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.1978825067" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.1978825067" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.1978825067" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.1978825067" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1384264924" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">12. 웹 기반 측정도구는 휴대전화에서 사용하기 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.138033329" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.138033329" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.138033329" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.138033329" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.345822409" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">13. 웹 기반 측정도구는 지역사회 노인이 스스로 응답하기 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.606444554" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.606444554" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.606444554" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.606444554" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.21235988" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">14. 웹 기반 측정도구는 지역사회 현장(예: 보건소, 복지관 등)에서 노인의 노쇠를 평가하는 데 활용하기 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.640292525" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.640292525" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.640292525" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.640292525" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1115915178" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">15. 웹 기반 측정도구는 향후 노쇠 관리 프로그램에 활용 가능성이 높다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.79229317" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.79229317" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.79229317" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.79229317" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.2024142642" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div></div>
+<div class="expert-q"><label class="prompt" for="K-FRAIL16">16. 웹 기반 FRAIL 척도의 한국어판(K-FRAIL)의 화면 구성, 글자 및 버튼 크기, 응답 방법, 화면 이동 등에서 개선이 필요하다고 생각하는 부분이 있다면 구체적으로 작성하여 주십시오.</label><textarea id="K-FRAIL16" name="entry.1114467773"></textarea></div>
 
-<section class="page" data-page="1">
-<div class="card">
-  <div class="section-title"><span class="pill">도구 2</span><h2>포괄적 한국 노인 허약 사정 도구 (CKFI)</h2></div>
-  <div class="instrument">
-    <div class="instrument-question"><p>1. 다른 사람 도움이나 보조기 없이 머리보다 높은 곳에 있는 것을 손을 뻗쳐서 닿기 동작을 할 때 어려움을 느끼십니까?</p><div class="option-row"><span class="chip">아니오</span><span class="chip">예</span></div></div>
+<div class="nav"><button type="button" class="btn btn-secondary" onclick="goTo(2)">← 뒤로가기</button><button type="button" class="btn btn-primary" onclick="goTo(4)">다음: CKFI 평가 →</button></div>
+</div></section><section class="page" data-page="4"><div class="card">
+<div class="section-title"><span class="pill">도구 2</span><h2>포괄적 한국 노인 허약 사정 도구 (CKFI)</h2></div>
+<p class="page-intro">다음은 포괄적 한국 노인 허약 사정 도구(CKFI)의 디지털 플랫폼입니다. 웹 기반 구현 형태를 확인하신 후 각 항목의 적절성을 평가해 주십시오.</p>
+<div class="platform-box">
+<p>아래 QR코드 또는 링크를 통해 실제 플랫폼 화면을 확인하실 수 있습니다.</p>
+<img class="qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVgAAAFYAQAAAAA+F9ntAAACdUlEQVR4nO2awY7jMAxDyUX+/5e5B1GycxtkZrpS1i3QNMk7EIJAS7IpfPnz5+voYQ972BewFwDGX1EAKELxSKDW2x56p7EXAAhwHB3MCDElUOttB70zWTKzNHJWAAURkdJ+20fvHPba/osIU6DkeEeAf1nD/8JmLCmuJP6whrexkb8RRjEXOYFxA9XbHnqnsRewVjX5G3krAqDybQ+909i7A7B8F4oM/oSGN7PUlqOuxORAy3d500HvNDYKMKBSlai8jVYD5cod9I5k7bbLb0WGHQOkpPDiNnoHsfZfYrtGOlfalnd00DuNveBWrcYM4Q6rUabSoDvonchGcKXoKbIWVqSvY3v89xtsrGZErXQkHN54FBOINnoHsoJiugPXZGQ8kZuND2h4IwtJaQm+ONJ+pDAOSOqgdxob/bHyV3WBb6Jh1m9qeDObOxSq+iGLhuqWPZXooXciK0j2AgCkew2K9l8XyV30TmJd/7ISmKrEzTr41GfP2Qsx5mVVZVkvxH7c2vLsoXcamx2wQ0jvEYUH25jdwrXQO42lY4nVpuUEzdc1XOugdxp7weMz0CuZM/cedJ75zjPWy1nNcHJRU614OfHpoXcky9ywqA0MAb61CZ/5wzfYiCZc77qcUPYdXt0a6R3HyuMzkNFawJfbHnIfvXPYff+Y5QYAaslDNXAd9E5j9/OTELdVDVQO2HHq36fs/fykBznRaWy79McfnrJxPmoddlgFsH+52A56p7HX7S4L4Wrj5KPAZ3/+B1itUTpUfbNq876b3gnsfn4yh+1az3zc+pyvfsrezk/W4bNtxlOm3EPvNPZ+fvLfaDjsYQ/bk/0LG7dCqeez0ekAAAAASUVORK5CYII=" alt="CKFI 플랫폼 QR코드">
+<a class="platform-link" href="https://sparkling26.github.io/frailty-assessment/index.html#ckfi" target="_blank" rel="noopener">https://sparkling26.github.io/frailty-assessment/index.html#ckfi</a></div>
+<div class="instrument-box"><div class="instrument"><div class="instrument-question"><p>1. 다른 사람 도움이나 보조기 없이 머리보다 높은 곳에 있는 것을 손을 뻗쳐서 닿기 동작을 할 때 어려움을 느끼십니까?</p><div class="option-row"><span class="chip">아니오</span><span class="chip">예</span></div></div>
     <div class="instrument-question"><p>2. 다른 사람 도움이나 보조기 없이 쉬지 않고 10계단 오르기 동작을 할 때 어려움을 느끼십니까?</p><div class="option-row"><span class="chip">아니오</span><span class="chip">예</span></div></div>
     <div class="instrument-question"><p>3. 고기나 사과같이 딱딱한 음식을 씹을 때 어려움을 느끼십니까? 틀니를 착용하시는 경우 틀니를 착용한 상태를 기준으로 말씀해 주십시오.</p><div class="option-row"><span class="chip">아니오</span><span class="chip">예</span></div></div>
     <div class="instrument-question"><p>4. 현재 시력 때문에 일상적인 활동을 하는 데 어려움이 있습니까?</p><div class="option-row"><span class="chip">아니오</span><span class="chip">예</span></div></div>
@@ -74,98 +139,149 @@ textarea{width:100%;min-height:120px;border:1px solid var(--line);border-radius:
     <div class="instrument-question"><p>11. 참여하시는 모임(단체 활동)이 있으십니까? (예: 친목, 종교, 문화 활동, 스포츠, 시민 또는 사회, 이익 또는 정치, 봉사, 학습단체)</p><div class="option-row"><span class="chip">예</span><span class="chip">아니오</span></div></div>
     <div class="instrument-question"><p>12. 관계에 만족하는 주변 사람들이 몇 분이십니까?</p><div class="option-row"><span class="chip">2명 이상</span><span class="chip">1명 이하</span></div></div>
     <div class="instrument-question"><p>13. 현재부터 1년 전까지 나의 고민이나 걱정거리를 들어준 주변사람들이 몇 분이십니까?</p><div class="option-row"><span class="chip">2명 이상</span><span class="chip">1명 이하</span></div></div>
-    <div class="instrument-question"><p>14. 현재부터 1년 전까지 어르신께서는 가족을 포함한 주변사람들에게 용돈, 생활비 등의 경제적 도움을 몇 번 받으셨습니까?</p><div class="option-row"><span class="chip">1번 이상</span><span class="chip">받은 적 없음</span></div></div>
-  </div>
-  <div class="expert"><h3>CKFI 전문가 평가</h3><div class="scale-note"><strong>응답 기준</strong>1점: 적절하지 않음 · 2점: 수정을 하지 않는 한 적절하다고 하기 어려움 · 3점: 적절한 편이나 약간의 수정이 필요함 · 4점: 매우 적절함</div><div id="ckfiRatings"></div></div>
-  <div class="expert-q"><label class="prompt" for="ckfi16">16. 웹 기반 측정도구의 화면 구성, 글자 및 버튼 크기, 응답 방법, 화면 이동 등에서 개선이 필요하다고 생각하는 부분이 있다면 구체적으로 작성하여 주십시오.</label><textarea id="ckfi16" name="entry.1111482202"></textarea></div>
-  <div class="nav"><button type="button" class="btn btn-secondary" onclick="goTo(0)">← 뒤로가기</button><button type="button" class="btn btn-primary" onclick="goTo(2)">다음 도구 →</button></div>
-</div>
-</section>
+    <div class="instrument-question"><p>14. 현재부터 1년 전까지 어르신께서는 가족을 포함한 주변사람들에게 용돈, 생활비 등의 경제적 도움을 몇 번 받으셨습니까?</p><div class="option-row"><span class="chip">1번 이상</span><span class="chip">받은 적 없음</span></div></div></div></div>
+<div class="expert"><h3 class="expert-title">포괄적 한국 노인 허약 사정 도구(CKFI) 전문가 평가</h3><p class="expert-guide">※ 실제 플랫폼 화면을 확인하신 후 전문가 평가에 응답해 주십시오.</p><div class="scale-note"><strong>응답 기준</strong><div class="scale-guide"><span class="guide-1">1점: 적절하지 않음</span><span class="guide-2">2점: 수정을 하지 않는 한 적절하다고 하기 어려움</span><span class="guide-3">3점: 적절한 편이나 약간의 수정이 필요함</span><span class="guide-4">4점: 매우 적절함</span></div></div>
+<div class="expert-q"><label class="prompt">1. CKFI은 지역사회 노인의 노쇠를 평가하기에 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.612153049" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.612153049" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.612153049" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.612153049" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1161235177" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">2. 웹 기반으로 구현된 측정도구는 원래 측정도구의 내용을 적절히 반영하고 있다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.926607716" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.926607716" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.926607716" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.926607716" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.9907877" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">3. 웹 기반 측정도구는 지역사회 노인에게 적용하기 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.2132074365" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.2132074365" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.2132074365" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.2132074365" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1366563967" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">4. 웹 기반 측정도구는 지역사회 노인의 건강상태를 파악하기에 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.1813050809" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.1813050809" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.1813050809" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.1813050809" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1680047162" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">5. 웹 기반 측정도구는 노쇠 고위험군을 선별하기에 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.818876466" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.818876466" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.818876466" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.818876466" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1617058435" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">6. 웹 기반 측정도구는 노인이 이해하기 쉬운 표현으로 구성되어 있다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.770135180" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.770135180" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.770135180" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.770135180" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.721292795" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">7. 웹 기반 측정도구의 문항 수는 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.1591501773" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.1591501773" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.1591501773" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.1591501773" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.2019470039" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">8. 웹 기반 측정도구의 화면 구성은 이해하기 쉽다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.1399292169" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.1399292169" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.1399292169" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.1399292169" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.976231213" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">9. 웹 기반 측정도구의 글자 크기는 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.2070121209" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.2070121209" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.2070121209" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.2070121209" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.794805758" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">10. 웹 기반 측정도구의 버튼 크기는 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.1584163016" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.1584163016" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.1584163016" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.1584163016" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.233313651" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">11. 웹 기반 측정도구의 응답 과정은 직관적이다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.312361564" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.312361564" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.312361564" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.312361564" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1229875729" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">12. 웹 기반 측정도구는 휴대전화에서 사용하기 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.502128827" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.502128827" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.502128827" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.502128827" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.193966875" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">13. 웹 기반 측정도구는 지역사회 노인이 스스로 응답하기 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.2007359888" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.2007359888" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.2007359888" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.2007359888" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1390949332" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">14. 웹 기반 측정도구는 지역사회 현장(예: 보건소, 복지관 등)에서 노인의 노쇠를 평가하는 데 활용하기 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.808535112" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.808535112" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.808535112" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.808535112" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.387333634" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">15. 웹 기반 측정도구는 향후 노쇠 관리 프로그램에 활용 가능성이 높다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.2076715788" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.2076715788" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.2076715788" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.2076715788" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.669169598" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div></div>
+<div class="expert-q"><label class="prompt" for="CKFI16">16. 웹 기반 포괄적 한국 노인 허약 사정 도구(CKFI)의 화면 구성, 글자 및 버튼 크기, 응답 방법, 화면 이동 등에서 개선이 필요하다고 생각하는 부분이 있다면 구체적으로 작성하여 주십시오.</label><textarea id="CKFI16" name="entry.1111482202"></textarea></div>
 
-<section class="page" data-page="2">
-<div class="card">
-  <div class="section-title"><span class="pill">도구 3</span><h2>한국형 노쇠 척도 (KFS)</h2></div>
-  <div class="instrument">
-    <div class="instrument-question"><p><strong>신체적 노쇠</strong></p><p>1. 지난 1년 동안 특별한 이유 없이 체중이 4.5kg 이상 또는 기존 체중의 5% 이상 감소하였습니까?</p><div class="option-row"><span class="chip">예</span><span class="chip">아니오</span></div></div>
+<div class="nav"><button type="button" class="btn btn-secondary" onclick="goTo(3)">← 뒤로가기</button><button type="button" class="btn btn-primary" onclick="goTo(5)">다음: KFS 평가 →</button></div>
+</div></section><section class="page" data-page="5"><div class="card">
+<div class="section-title"><span class="pill">도구 3</span><h2>한국형 노쇠척도 (KFS)</h2></div>
+<p class="page-intro">다음은 한국형 노쇠척도(KFS)의 디지털 플랫폼입니다. 웹 기반 구현 형태를 확인하신 후 각 항목의 적절성을 평가해 주십시오.</p>
+<div class="platform-box">
+<p>아래 QR코드 또는 링크를 통해 실제 플랫폼 화면을 확인하실 수 있습니다.</p>
+<img class="qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVgAAAFYAQAAAAA+F9ntAAACcUlEQVR4nO2ay47cMAwEqwP//y93DnzYvi202USacE4eqQ4EQVBkkzJf/v36OjrssMN+AIvt/sLG2GDAcXRzO9h7GntBeBMBwiBbssDS63YHe89kpfYuAA5vZ2jH7U72nsNer38CGWSM8O3wH7XhP2LDn1Z4N+P4L9vwUWzE7x2mQiY8bFmv2x3sPY29gA7SeNTCw/dJh/AO9p7GPnyJsIw6YOXX9Rb2nsbGc9Z1mCzLPDPDXaPtYO9prNKF5Wbf/+pezsptB3tPYzN+q1iI8I3zDNwIaLyHvSeyBrCV3RtdnRmik5v8sMrqTgiEJ/tVE3SJxsTvGnsRRVj2EuVYgSM3YE39u85Wtn2Eab9v6vj15N9FNuqHfOTqROVRUW3y1A/fYgVCoZRJTglYuCTL0SfX2NAf5E4M1V9UpWbkzME72HsiKyOhyLuuPrmkiMjME79r7Kt+uNNtpIZSK83kh0WWyrUQJZlr9BbzuJrFeeZv66zDzSlN5kwzpEnFyFM/bsOHsv2+ZZ0bXzkkikFGEVvYexqb84tIsa3kWLiVnXr2trD3TDYbjAzerCgqdqf+/QabmUCu8XypwHX/EHx2sPc0tubzqQHLronGrfqI0X9X2XrJco5xCxF6TYemf1tke79EVI+c33rs88z+zir7mh/nwk4+a52TNfrDMnvRCw7OFFF7O7kipW48drD3NPa5P9mOrW0/56Wmf1tls39LlUElt3drEf3F5N8/xDoqMz0Gm7QksaG9Z7GVIlzSekpqGn1ylX3uT7rLXaqnkNzv3xb2nsY+9ydV25IxLsqJxu3hHew9jX0tSP4jG4Yddtg92d9ZT0Cu4ohKAAAAAABJRU5ErkJggg==" alt="KFS 플랫폼 QR코드">
+<a class="platform-link" href="https://sparkling26.github.io/frailty-assessment/index.html#kfs" target="_blank" rel="noopener">https://sparkling26.github.io/frailty-assessment/index.html#kfs</a></div>
+<div class="instrument-box"><div class="instrument"><div class="instrument-question"><p><strong>신체적 노쇠</strong></p><p>1. 지난 1년 동안 특별한 이유 없이 체중이 4.5kg 이상 또는 기존 체중의 5% 이상 감소하였습니까?</p><div class="option-row"><span class="chip">예</span><span class="chip">아니오</span></div></div>
     <div class="instrument-question"><p>2. 현재 자신의 건강상태를 어떻게 생각하십니까?</p><div class="option-row"><span class="chip">나쁘다</span><span class="chip">나쁘지 않다</span></div></div>
     <div class="instrument-question"><p><strong>심리적 노쇠</strong></p><p>3. 지난 4주 동안 얼마나 자주 피곤함을 느끼셨습니까?</p><div class="option-row"><span class="chip">항상 그렇다</span><span class="chip">대부분 그렇다</span><span class="chip">가끔 그렇다</span><span class="chip">조금 그렇다</span><span class="chip">전혀 그렇지 않다</span></div></div>
     <div class="instrument-question"><p>4. 활력이나 의욕이 없어 평소 하던 활동이나 관심사를 많이 줄이셨습니까?</p><div class="option-row"><span class="chip">예</span><span class="chip">아니오</span></div></div>
     <div class="instrument-question"><p><strong>사회적 노쇠</strong></p><p>5. 친구를 만나거나 이야기하는 빈도는 어느 정도입니까?</p><div class="option-row"><span class="chip">매일</span><span class="chip">주 2~3회</span><span class="chip">주 1회 이상</span><span class="chip">월 1회 이상</span><span class="chip">월 1회 미만</span><span class="chip">친구가 없음</span></div></div>
-    <div class="instrument-question"><p>6. 친밀하고 의지할 수 있는 사람과 원하는 만큼 연락하고 계십니까?</p><div class="option-row"><span class="chip">전혀 그렇지 않다</span><span class="chip">거의 그렇지 않다</span><span class="chip">가끔 그렇다</span><span class="chip">대부분 그렇다</span><span class="chip">항상 그렇다</span></div></div>
-  </div>
-  <div class="expert"><h3>KFS 전문가 평가</h3><div class="scale-note"><strong>응답 기준</strong>1점: 적절하지 않음 · 2점: 수정을 하지 않는 한 적절하다고 하기 어려움 · 3점: 적절한 편이나 약간의 수정이 필요함 · 4점: 매우 적절함</div><div id="kfsRatings"></div></div>
-  <div class="expert-q"><label class="prompt" for="kfs16">16. 웹 기반 측정도구의 화면 구성, 글자 및 버튼 크기, 응답 방법, 화면 이동 등에서 개선이 필요하다고 생각하는 부분이 있다면 구체적으로 작성하여 주십시오.</label><textarea id="kfs16" name="entry.1087185980"></textarea></div>
-  <div class="nav"><button type="button" class="btn btn-secondary" onclick="goTo(1)">← 뒤로가기</button><button type="button" class="btn btn-primary" onclick="goTo(3)">종합 평가 →</button></div>
-</div>
-</section>
+    <div class="instrument-question"><p>6. 친밀하고 의지할 수 있는 사람과 원하는 만큼 연락하고 계십니까?</p><div class="option-row"><span class="chip">전혀 그렇지 않다</span><span class="chip">거의 그렇지 않다</span><span class="chip">가끔 그렇다</span><span class="chip">대부분 그렇다</span><span class="chip">항상 그렇다</span></div></div></div></div>
+<div class="expert"><h3 class="expert-title">한국형 노쇠척도(KFS) 전문가 평가</h3><p class="expert-guide">※ 실제 플랫폼 화면을 확인하신 후 전문가 평가에 응답해 주십시오.</p><div class="scale-note"><strong>응답 기준</strong><div class="scale-guide"><span class="guide-1">1점: 적절하지 않음</span><span class="guide-2">2점: 수정을 하지 않는 한 적절하다고 하기 어려움</span><span class="guide-3">3점: 적절한 편이나 약간의 수정이 필요함</span><span class="guide-4">4점: 매우 적절함</span></div></div>
+<div class="expert-q"><label class="prompt">1. KFS은 지역사회 노인의 노쇠를 평가하기에 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.1359711955" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.1359711955" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.1359711955" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.1359711955" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1138354283" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">2. 웹 기반으로 구현된 측정도구는 원래 측정도구의 내용을 적절히 반영하고 있다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.10105382" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.10105382" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.10105382" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.10105382" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.18490402" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">3. 웹 기반 측정도구는 지역사회 노인에게 적용하기 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.9544440" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.9544440" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.9544440" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.9544440" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1455457993" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">4. 웹 기반 측정도구는 지역사회 노인의 건강상태를 파악하기에 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.425636896" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.425636896" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.425636896" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.425636896" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.223622565" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">5. 웹 기반 측정도구는 노쇠 고위험군을 선별하기에 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.881716955" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.881716955" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.881716955" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.881716955" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1709204164" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">6. 웹 기반 측정도구는 노인이 이해하기 쉬운 표현으로 구성되어 있다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.665311767" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.665311767" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.665311767" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.665311767" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.27232880" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">7. 웹 기반 측정도구의 문항 수는 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.871813791" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.871813791" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.871813791" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.871813791" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.896889189" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">8. 웹 기반 측정도구의 화면 구성은 이해하기 쉽다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.727759691" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.727759691" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.727759691" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.727759691" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.991240122" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">9. 웹 기반 측정도구의 글자 크기는 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.315501800" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.315501800" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.315501800" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.315501800" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.802371938" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">10. 웹 기반 측정도구의 버튼 크기는 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.1045976086" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.1045976086" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.1045976086" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.1045976086" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.2007790569" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">11. 웹 기반 측정도구의 응답 과정은 직관적이다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.1470407117" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.1470407117" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.1470407117" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.1470407117" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1637684633" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">12. 웹 기반 측정도구는 휴대전화에서 사용하기 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.1083473538" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.1083473538" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.1083473538" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.1083473538" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.149009512" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">13. 웹 기반 측정도구는 지역사회 노인이 스스로 응답하기 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.803154912" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.803154912" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.803154912" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.803154912" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.408495314" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">14. 웹 기반 측정도구는 지역사회 현장(예: 보건소, 복지관 등)에서 노인의 노쇠를 평가하는 데 활용하기 적절하다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.2102938121" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.2102938121" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.2102938121" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.2102938121" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1221345777" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div>
+<div class="expert-q"><label class="prompt">15. 웹 기반 측정도구는 향후 노쇠 관리 프로그램에 활용 가능성이 높다.</label>
+<div class="scale"><label class="score score-1"><input type="radio" name="entry.1512935416" value="1" required> 1점</label><label class="score score-2"><input type="radio" name="entry.1512935416" value="2" required> 2점</label><label class="score score-3"><input type="radio" name="entry.1512935416" value="3" required> 3점</label><label class="score score-4"><input type="radio" name="entry.1512935416" value="4" required> 4점</label></div>
+<div class="comment-box"><textarea name="entry.1331796049" placeholder="이 문항에 대한 의견이 있다면 작성해 주십시오. (선택)"></textarea></div></div></div>
+<div class="expert-q"><label class="prompt" for="KFS16">16. 웹 기반 한국형 노쇠척도(KFS)의 화면 구성, 글자 및 버튼 크기, 응답 방법, 화면 이동 등에서 개선이 필요하다고 생각하는 부분이 있다면 구체적으로 작성하여 주십시오.</label><textarea id="KFS16" name="entry.1087185980"></textarea></div>
 
-<section class="page" data-page="3">
-<div class="card">
-  <div class="section-title"><span class="pill">마지막</span><h2>종합 평가</h2></div>
-  <div class="expert-q"><label class="prompt">17. 앞서 평가한 문항의 이해성, 내용의 적절성, 대상자의 응답 용이성, 현장 적용 가능성 등을 종합적으로 고려할 때, 지역사회 노인의 노쇠 평가에 가장 적절하다고 생각하는 도구를 하나 선택해 주십시오.</label>
-    <div class="final-choice">
-      <label><input type="radio" name="entry.1371312703" value="K-FRAIL" required> K-FRAIL</label>
-      <label><input type="radio" name="entry.1371312703" value="CKFI"> CKFI</label>
-      <label><input type="radio" name="entry.1371312703" value="KFS"> KFS</label>
-    </div>
-  </div>
-  <div class="expert-q"><label class="prompt" for="final17_1">17-1. 선택한 도구가 다른 두 도구보다 적절하다고 판단한 이유를 구체적으로 작성하여 주십시오.</label><textarea id="final17_1" name="entry.1748548375"></textarea></div>
-  <div class="submit-box"><strong>응답 제출</strong><div class="small">응답 제출 버튼을 누르면 입력한 내용이 Google Forms에 저장됩니다.</div></div>
-  <div class="nav"><button type="button" class="btn btn-secondary" onclick="goTo(2)">← 뒤로가기</button><button type="submit" class="btn btn-primary">응답 제출</button></div>
-</div>
-</section>
-</form>
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none"></iframe>
-<p class="footer-note">연구용 델파이 조사 시범 페이지</p>
-</div>
+<div class="nav"><button type="button" class="btn btn-secondary" onclick="goTo(4)">← 뒤로가기</button><button type="button" class="btn btn-primary" onclick="goTo(6)">종합 평가 →</button></div>
+</div></section><section class="page" data-page="6"><div class="card">
+<div class="section-title"><span class="pill">마지막</span><h2>종합 평가</h2></div>
+<div class="expert-q"><label class="prompt">17. 앞서 평가한 문항의 이해성, 내용의 적절성, 대상자의 응답 용이성, 현장 적용 가능성 등을 종합적으로 고려할 때, 웹 기반 지역사회 노인의 노쇠 평가에 가장 적절하다고 생각하는 도구를 하나 선택해 주십시오.</label>
+<div class="final-choice">
+<label><input type="radio" name="entry.1371312703" value="K-FRAIL" required> <span class="choice-korean">FRAIL 척도의 한국어판</span><span class="choice-code">(K-FRAIL)</span></label>
+<label><input type="radio" name="entry.1371312703" value="CKFI"> <span class="choice-korean">포괄적 한국 노인 허약 사정 도구</span><span class="choice-code">(CKFI)</span></label>
+<label><input type="radio" name="entry.1371312703" value="KFS"> <span class="choice-korean">한국형 노쇠척도</span><span class="choice-code">(KFS)</span></label></div></div>
+<div class="expert-q"><label class="prompt" for="final17_1">17-1. 선택한 도구가 다른 두 도구보다 적절하다고 판단한 이유를 구체적으로 작성하여 주십시오.</label><textarea id="final17_1" name="entry.1748548375" required data-required-text></textarea><div class="validation-message">응답을 작성해 주십시오.</div></div>
+<div class="expert-q"><label class="prompt" for="final_add">17-2. 선택한 도구를 사용할 때 대상자의 노쇠를 정확하게 측정하기 위해 추가적으로 보완할 요소가 있다면 무엇이라고 생각하십니까?</label><textarea id="final_add" name="entry.139110724" required data-required-text></textarea><div class="validation-message">응답을 작성해 주십시오.</div></div>
+<div class="submit-box"><strong>응답 제출</strong><div class="small">응답 제출 버튼을 누르면 입력한 내용이 Google Forms에 저장됩니다.</div></div>
+<div class="nav"><button type="button" class="btn btn-secondary" onclick="goTo(5)">← 뒤로가기</button><button type="submit" class="btn btn-primary">응답 제출</button></div></div></section>
+</form><iframe name="hidden_iframe" id="hidden_iframe" style="display:none"></iframe>
+<p class="footer-note">연구용 델파이 조사 페이지</p></div>
 <script>
-const common = [
-  tool => `${tool}은 지역사회 노인의 노쇠를 평가하기에 적절하다.`,
-  () => `웹 기반으로 구현된 측정도구는 원래 측정도구의 내용을 적절히 반영하고 있다.`,
-  () => `웹 기반 측정도구는 지역사회 노인에게 적용하기 적절하다.`,
-  () => `웹 기반 측정도구는 지역사회 노인의 건강상태를 파악하기에 적절하다.`,
-  () => `웹 기반 측정도구는 노쇠 고위험군을 선별하기에 적절하다.`,
-  () => `웹 기반 측정도구는 노인이 이해하기 쉬운 표현으로 구성되어 있다.`,
-  () => `웹 기반 측정도구의 문항 수는 적절하다.`,
-  () => `웹 기반 측정도구의 화면 구성은 이해하기 쉽다.`,
-  () => `웹 기반 측정도구의 글자 크기는 적절하다.`,
-  () => `웹 기반 측정도구의 버튼 크기는 적절하다.`,
-  () => `웹 기반 측정도구의 응답 과정은 직관적이다.`,
-  () => `웹 기반 측정도구는 휴대전화에서 사용하기 적절하다.`,
-  () => `웹 기반 측정도구는 지역사회 노인이 스스로 응답하기 적절하다.`,
-  () => `웹 기반 측정도구는 지역사회 현장(예: 보건소, 복지관 등)에서 노인의 노쇠를 평가하는 데 활용하기 적절하다.`,
-  () => `웹 기반 측정도구는 향후 노쇠 관리 프로그램에 활용 가능성이 높다.`
-];
-const entryIds = {
-  "K-FRAIL": [261253188, 2045432866, 440348384, 1194546110, 1788730513, 1724020426, 210670835, 871687278, 1587926528, 940997252, 1978825067, 138033329, 606444554, 640292525, 79229317],
-  "CKFI": [612153049, 926607716, 2132074365, 1813050809, 818876466, 770135180, 1591501773, 1399292169, 2070121209, 1584163016, 312361564, 502128827, 2007359888, 808535112, 2076715788],
-  "KFS": [1359711955, 10105382, 9544440, 425636896, 881716955, 665311767, 871813791, 727759691, 315501800, 1045976086, 1470407117, 1083473538, 803154912, 2102938121, 1512935416]
-};
-function renderRatings(targetId, tool){
-  const el=document.getElementById(targetId);
-  common.forEach((fn,i)=>{
-    const n=i+1;
-    const entryId=entryIds[tool][i];
-    const wrap=document.createElement('div'); wrap.className='expert-q';
-    wrap.innerHTML=`<label class="prompt">${n}. ${fn(tool)}</label><div class="scale">${[1,2,3,4].map(v=>`<label><input type="radio" name="entry.${entryId}" value="${v}" required> ${v}점</label>`).join('')}</div>`;
-    el.appendChild(wrap);
-  });
-}
-renderRatings('kfrailRatings','K-FRAIL');
-renderRatings('ckfiRatings','CKFI');
-renderRatings('kfsRatings','KFS');
 const pages=[...document.querySelectorAll('.page')];
 function goTo(i){pages.forEach((p,idx)=>p.classList.toggle('active',idx===i));document.getElementById('progressFill').style.width=((i+1)/pages.length*100)+'%';window.scrollTo({top:0,behavior:'smooth'});}
+function updateConsent(){const yes=document.querySelector('input[name="entry.1869546749"][value="동의합니다"]');document.getElementById('consentNext').disabled=!yes.checked;}
+function recordConsentAndNext(){const name=document.getElementById('participantName'); if(!name.value.trim()){alert('성명을 입력해 주십시오.');name.focus();return;} document.getElementById('consentTime').value=new Date().toISOString();goTo(2);}
 goTo(0);
-let submitted=false;
-document.getElementById('delphiForm').addEventListener('submit',e=>{
-  submitted=true;
-  setTimeout(()=>{
-    alert('응답이 제출되었습니다. 감사합니다.');
-    document.getElementById('delphiForm').reset();
-    goTo(0);
-  },700);
-});
-</script>
-</body>
-</html>
+function showKoreanRequiredMessage(el,msgText='응답을 작성해 주십시오.'){
+  let msg=el.parentElement.querySelector('.validation-message');
+  if(!msg){
+    msg=document.createElement('div');
+    msg.className='validation-message';
+    el.parentElement.appendChild(msg);
+  }
+  msg.textContent=msgText;
+  msg.style.display='block';
+}
+function validateRequiredText(){let ok=true;document.querySelectorAll('[data-required-text]').forEach(el=>{const msg=el.nextElementSibling;if(!el.value.trim()){el.classList.add('touched');if(msg)msg.style.display='block';if(ok)el.focus();ok=false;}else{el.classList.remove('touched');if(msg)msg.style.display='none';}});return ok;}
+document.querySelectorAll('[data-required-text]').forEach(el=>el.addEventListener('input',()=>{const msg=el.nextElementSibling;if(el.value.trim()){el.classList.remove('touched');if(msg)msg.style.display='none';}}));
+
+document.getElementById('delphiForm').addEventListener('submit',e=>{if(!validateRequiredText()){e.preventDefault();goTo(6);return;}setTimeout(()=>{alert('응답이 제출되었습니다. 감사합니다.');},700);});
+</script></body></html>
